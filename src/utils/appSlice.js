@@ -21,10 +21,12 @@ const appSlice = createSlice ({
         },
         watchLetterMenu : (state) =>{
             state.isWatchMenuOpen = !state.isWatchMenuOpen;
-        }
-
+        },
+        closeMenu: (state) => {
+            state.isMenuOpen = false;
+        },
     },
 });
 
-export const {toggleMenu , categoryMenu , subscriptionMenu , watchLetterMenu} = appSlice.actions;
+export const {toggleMenu , categoryMenu , subscriptionMenu , watchLetterMenu , closeMenu} = appSlice.actions;
 export default appSlice.reducer;

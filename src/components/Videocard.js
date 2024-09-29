@@ -1,5 +1,6 @@
 import React from 'react'
 
+
 const Videocard = ({info}) => {
     // Log to check the structure of `info`
     console.log(info);
@@ -14,9 +15,9 @@ const Videocard = ({info}) => {
     const { channelTitle, title, thumbnails } = snippet;
 
     return (
-        <div className='p-4 mx-10 m-2 w-[350px] bg-white rounded-lg shadow-lg transition transform hover:scale-105 hover:shadow-2xl'>
+        <div className='p-4 mx-10 m-2 w-[350px] bg-white rounded-lg shadow-lg transition  hover:scale-105 hover:shadow-2xl'>
     {/* Thumbnail image with rounded corners */}
-    <img className='rounded-lg mb-4 w-full  object-contain' alt='thumbnail' src={thumbnails?.medium?.url} />
+    <img className='rounded-lg mb-4 w-full  ' alt='thumbnail' src={thumbnails?.medium?.url} />
     
     <ul>
         {/* Channel title */}
@@ -32,5 +33,13 @@ const Videocard = ({info}) => {
 
     );
 }
+
+export const AdVideoCard = ({info}) =>{
+    return (
+      <div className='table'>
+        <Videocard info={info}/>
+      </div>
+    );
+  } ;
 
 export default Videocard;
