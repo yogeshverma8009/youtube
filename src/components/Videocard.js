@@ -33,7 +33,7 @@ const Videocard = ({info}) => {
 
     );
 }
-
+//Higher order component
 export const AdVideoCard = ({info}) =>{
     return (
       <div className='table'>

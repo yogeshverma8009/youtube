@@ -3,20 +3,30 @@ import { FaUser } from "react-icons/fa";
 import { GiHamburgerMenu } from "react-icons/gi";
 import { ImYoutube2 } from "react-icons/im";
 import { FiSearch } from "react-icons/fi";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { toggleMenu } from "../utils/appSlice";
 import { SEARCH_API } from "../utils/constant";
+import { cacheResults } from "../utils/searchSlice";
 
 const Head = () => {
   const [searchQuery, setSearchQuery] = useState("");
   const [suggestions, setSuggestions] = useState([]);
   const [showSuggestion, setShowSuggestion] = useState(false);
+  const searchCache = useSelector((store) => store.search);
+  const dispatch = useDispatch();
   useEffect(() => {
     // console.log(searchQuery);
     //make an api call after ever key press
     //but if the difference between 2 API calls is <200ms
     //decline the API call
-    const timer = setTimeout(() => getSearchSuggestion(), 200);
+    const timer = setTimeout(() =>{
+      if(searchCache[searchQuery]){
+        setSuggestions(searchCache[searchQuery])
+      }else{
+        getSearchSuggestion()
+      }
+    } , 200);
+
     return () => {
       clearTimeout(timer);
     };
@@ -45,8 +55,14 @@ const Head = () => {
     const json = await data.json();
     // console.log(json[1]);
     setSuggestions(json[1]);
+
+    //update cache
+    dispatch(cacheResults({
+      [searchQuery]: json[1] 
+    }
+    ))
   };
-  const dispatch = useDispatch();
+ 
 
   const toggleMenuHandler = () => {
     dispatch(toggleMenu());
