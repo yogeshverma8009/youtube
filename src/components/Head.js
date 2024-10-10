@@ -97,7 +97,7 @@ const Head = () => {
                 <FiSearch className="mr-2" /> {s}
               </li>
               ))}
-              
+               
             </ul>
           </div>
         )}
